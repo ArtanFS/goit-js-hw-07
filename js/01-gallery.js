@@ -23,4 +23,15 @@ const galleryList = galleryItems.map(({ preview, original, description }) => {
 
 gallery.append(...galleryList);
 
-// console.log(galleryItems);
+gallery.addEventListener("click", selectImage);
+
+function selectImage(event) {
+    event.preventDefault();
+    if (event.target.tagName !== "IMG") {
+        return
+    }
+
+    const source = event.target.dataset.source;
+    
+    console.log(source);
+}
