@@ -32,6 +32,7 @@ function selectImage(event) {
     }
 
     const source = event.target.dataset.source;
-    
-    console.log(source);
+    const instance = basicLightbox.create(`<img src="${source}" width="1280">`);
+    instance.show()
+    // console.log(`"${source}"`);
 }
