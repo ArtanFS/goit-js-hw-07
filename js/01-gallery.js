@@ -25,6 +25,7 @@ gallery.append(...galleryList);
 
 gallery.addEventListener("click", selectImage);
 
+
 function selectImage(event) {
     event.preventDefault();
     if (event.target.tagName !== "IMG") {
@@ -33,6 +34,18 @@ function selectImage(event) {
 
     const source = event.target.dataset.source;
     const instance = basicLightbox.create(`<img src="${source}" width="1280">`);
+    
     instance.show()
-    // console.log(`"${source}"`);
+    document.addEventListener("keydown", closeModal)
+    
+    function closeModal({ key }) {
+        if (!basicLightbox.visible()) {
+            return
+        }
+        if (key !== "Escape") {
+            return
+        };
+        instance.close();
+        document.removeEventListener("keydown", closeModal);
+    }
 }
