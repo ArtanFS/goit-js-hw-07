@@ -23,4 +23,10 @@ const galleryList = galleryItems.map(({ preview, original, description }) => {
 
 gallery.append(...galleryList);
 
-var lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+var lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: "alt",
+    captionDelay: 250,
+    closeText: "",
+    showCounter: false,
+    disableRightClick: true,
+});
