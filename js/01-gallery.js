@@ -22,18 +22,16 @@ const galleryList = galleryItems.map(({ preview, original, description }) => {
 });
 
 gallery.append(...galleryList);
-
 gallery.addEventListener("click", selectImage);
-
 
 function selectImage(event) {
     event.preventDefault();
     if (!event.target.classList.contains("gallery__image")) {
-        return
+        return;
     }
 
     const source = event.target.dataset.source;
-    const instance = basicLightbox.create(`<img src="${source}" width="1280">`);
+    const instance = basicLightbox.create(`<img src="${source}"> width="1280" height="853"`);
     
     instance.show()
     document.addEventListener("keydown", closeModal)
