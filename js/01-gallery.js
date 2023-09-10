@@ -28,7 +28,7 @@ gallery.addEventListener("click", selectImage);
 
 function selectImage(event) {
     event.preventDefault();
-    if (event.target.tagName !== "IMG") {
+    if (!event.target.classList.contains("gallery__image")) {
         return
     }
 
@@ -38,13 +38,15 @@ function selectImage(event) {
     instance.show()
     document.addEventListener("keydown", closeModal)
     
-    function closeModal({ key }) {
+    function closeModal(event) {
         if (!basicLightbox.visible()) {
-            return
-        }
-        if (key !== "Escape") {
-            return
+            document.removeEventListener("keydown", closeModal);
+            return;
         };
+        if (event.code !== "Escape") {
+            return;
+        }
+        
         instance.close();
         document.removeEventListener("keydown", closeModal);
     }
