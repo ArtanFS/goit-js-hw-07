@@ -31,21 +31,21 @@ function selectImage(event) {
     }
 
     const source = event.target.dataset.source;
-    const instance = basicLightbox.create(`<img src="${source}"> width="1280" height="853"`);
+    const instance = basicLightbox.create(`<img src="${source}"> width="1280" height="853"`, {
+        onShow: (instance) => {
+            document.addEventListener("keydown", closeModal)
+        },
+        onClose: (instance) => {
+            document.removeEventListener("keydown", closeModal)
+        },
+        });
     
     instance.show()
-    document.addEventListener("keydown", closeModal)
     
     function closeModal(event) {
-        if (!basicLightbox.visible()) {
-            document.removeEventListener("keydown", closeModal);
+        if (!basicLightbox.visible() || event.code !== "Escape") {
             return;
-        };
-        if (event.code !== "Escape") {
-            return;
-        }
-        
+        }        
         instance.close();
-        document.removeEventListener("keydown", closeModal);
     }
 }
